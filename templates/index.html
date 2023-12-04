@@ -1,12 +1,43 @@
 {% extends 'base.html' %}
 {% block body %}
 <div class="container">
-  <form>
-    <input class="m-5 p-3 rounded-full border-4 border-blue-700 bg-blue-500 font-sans-roboto text-white placeholder-white" type="text" id="prodname" name="prodname" placeholder="Product Name"><br>
-    <input class="m-5 p-3 rounded-full border-4 border-blue-700 bg-blue-500 font-sans-roboto text-white placeholder-white" type="text" id="brand" name="brand" placeholder="Brand"><br>
-    <input class="m-5 p-3 rounded-full border-4 border-blue-700 bg-blue-500 font-sans-roboto text-white placeholder-white" type="number" id="quantity" name="quantity" min="0" placeholder="Quantity"><br>
+  <form action="/" method="POST">
+    <div class="mb-3 align-baseline  mt-3 col-3">
+      <input type="text" name="prodname" class="form-control bg-primary-subtle text-light border-primary border-4 rounded-pill" id="prodname" placeholder="Product Name">
+    </div>
+    <div class="mb-3 align-baseline  col-3">
+      <input type="text" name="brand" class="form-control bg-primary-subtle text-light border-primary border-4 rounded-pill" id="brand" placeholder="Brand">
+    </div>
+    <div class="mb-3 align-baseline  col-3">
+      <input type="number" name="quantity" class="form-control bg-primary-subtle text-light border-primary border-4 rounded-pill" id="quantity" placeholder="Quantity">
+    </div>
+    <button type="submit" class="btn btn-primary ">Submit</button>
   </form>
 </div>
-<div class="font-roboto">Test Font</div>
+
+<div class="container my-3"><table class="table rounded table-striped">
+  <thead class="table-dark">
+    <tr class="text-center">
+      <th scope="col">SNo</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider table-dark">
+    {% for prod in allProd %}
+    <tr>
+      <th scope="row" class="fw-medium text-center">{{loop.index}}</th>
+      <td class="fw-medium text-center">{{prod.prodname}}</td>
+      <td class="fw-medium text-center">{{prod.brand}}</td>
+      <td class="fw-medium text-center">{{prod.quantity}}</td>
+      <td class="text-center"><button type="button" class="btn btn-outline-warning">Update</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table></div>
 
 {% endblock body %}
